@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catatan Harian Azka</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+    background: linear-gradient(135deg,#dfe9f3,#ffffff);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* Background bubble */
+
+.bubbles{
+    position:fixed;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.bubbles span{
+    position:absolute;
+    bottom:-100px;
+    width:20px;
+    height:20px;
+    background:rgba(255,255,255,0.5);
+    border-radius:50%;
+    animation: bubble 15s linear infinite;
+}
+
+@keyframes bubble{
+    0%{
+        transform:translateY(0) scale(1);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-120vh) scale(1.5);
+        opacity:0;
+    }
+}
+
+.container{
+    width:90%;
+    max-width:750px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+.card{
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.title{
+    text-align:center;
+    font-size:38px;
+    color:#2d3436;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#777;
+    margin-bottom:30px;
+}
+
+.diary{
+    background:#f7f9fc;
+    border-left:5px solid #74b9ff;
+    padding:25px;
+    border-radius:18px;
+    line-height:1.9;
+    color:#444;
+    font-size:18px;
+    min-height:180px;
+    transition:0.3s;
+}
+
+button{
+    margin-top:25px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:#74b9ff;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.3s;
+    font-family:'Poppins', sans-serif;
+}
+
+button:hover{
+    background:#4da3ff;
+    transform:translateY(-2px);
+}
+
+.info{
+    margin-top:20px;
+    text-align:center;
+    color:#999;
+    font-size:14px;
+}
+
+.image{
+    width:100%;
+    margin-top:25px;
+    border-radius:18px;
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bubbles"></div>
+
+<div class="container">
+    <div class="card">
+
+        <h1 class="title">📓 Catatan Harian Azka</h1>
+
+        <p class="subtitle">
+            Tempat menyimpan cerita, pengalaman, dan pikiran sehari-hari.
+        </p>
+
+        <div class="diary" id="diaryText">
+            Hari ini cukup melelahkan, tapi ada banyak hal yang bisa dipelajari.
+            Kadang rencana tidak selalu berjalan sesuai harapan, namun itu bukan alasan untuk berhenti mencoba.
+        </div>
+
+        <button onclick="nextDiary()">
+            Halaman Berikutnya
+        </button>
+
+        <img 
+        src="https://images.unsplash.com/photo-1517841905240-472988babdf9"
+        class="image"
+        id="image">
+
+        <div class="info">
+            dibuat oleh Azka • website diary sederhana
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+/* isi diary */
+
+const diaryTexts = [
+
+"Besok mungkin akan ada tantangan baru. Yang penting tetap tenang dan jangan terlalu overthinking.",
+
+"Hari ini aku belajar kalau istirahat juga bagian dari proses berkembang.",
+
+"Terkadang hal kecil seperti ngobrol sebentar atau mendengar lagu bisa memperbaiki suasana hati.",
+
+"Tujuan besar dimulai dari langkah kecil yang dilakukan terus-menerus."
+
+];
+
+let index = 0;
+
+function nextDiary(){
+
+    index++;
+
+    if(index < diaryTexts.length){
+        document.getElementById("diaryText").innerHTML = diaryTexts[index];
+    }
+
+    if(index === diaryTexts.length - 1){
+        document.getElementById("image").style.display = "block";
+    }
+}
+
+/* bubble background */
+
+function createBubble(){
+
+    const bubble = document.createElement("span");
+
+    const size = Math.random() * 30;
+
+    bubble.style.width = 10 + size + "px";
+    bubble.style.height = 10 + size + "px";
+
+    bubble.style.left = Math.random() * 100 + "vw";
+
+    bubble.style.animationDuration = 8 + Math.random() * 10 + "s";
+
+    document.querySelector(".bubbles").appendChild(bubble);
+
+    setTimeout(()=>{
+        bubble.remove();
+    },18000);
+}
+
+setInterval(createBubble,400);
+
+</script>
+
+</body>
+</html>
